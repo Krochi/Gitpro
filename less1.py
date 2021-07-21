@@ -21,7 +21,7 @@
 #num = n * 123
 #print(num)
 
-# 1.4
+# 1.4 Целое число
 #i = int(input('Введите целое число:'))
 #ls = []
 #while i > 10:
@@ -44,6 +44,16 @@
     #print('Фирма несёт убытки')
 
 # 1.6 Про бегуна
+
+a = int(input('Дистанция в первый день:'))
+b = int(input('Введите желаемый :'))
+first_day = 1
+result = a
+while result < b:
+    a = a + 0.1
+    result += 1
+    result = result + a
+print(f'Результат на %.d' % result)
 
 
 
