@@ -1,14 +1,12 @@
-#Выставление времени
-import time
-start_time = time.monotonic()
-time.sleep(5)
-print(f'Прошло{time.monotonic() - start_time}')
+subj_dict = {}
+with open('test_5.txt') as file_dict:
+    for line in file_dict:
+        lesson_type, *lessons = line.split()
+        lesson_count = [int(lesson.strip('(л)(пр)(лаб)')) for lesson in lessons if lesson != '-']
+        subj_dict.update({lesson_type: sum(lesson_count)})
 
-n = int(input(''))
-s = 0
-k = 0
-while k < n:
-    k = k + 1
-    s = s + 1
-    print(n, s)
+print(subj_dict)
+
+
+
 
