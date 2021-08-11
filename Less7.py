@@ -82,48 +82,43 @@ print(jacket.get_square_j())
 #7.3 Реализовать программу работы с органическими клетками.
 
 class Cell:
-    def __init__(self, quantity):
-        self.quantity = int(quantity)
+    def __init__(self, count: int):
+        self._count = count
 
-    def __str__(self):
-        return f'Результат операции {self.quantity * "*"}'
+    def __add__(self, other: "Cell") -> "Cell":
+        return Cell(self._count + other._count)
 
-    def __add__(self, other):
-        # self.result = Cell(self.quantity + other.quantity)
-        return Cell(self.quantity + other.quantity)
+    def __sub__(self, other: "Cell") -> "Cell":
+        if self._count > other._count:
+            return Cell(self._count - other._count)
 
-    def __sub__(self, other):
-        '''
-        Выдает ошибку о том, что результат не число  при вычислении
-        if int(Cell(self.quantity - other.quantity)) > 0:
-            return Cell(int(self.quantity - other.quantity))
-        else:
-            return f'Операция вычитания невозможна'""
-        '''
-        return self.quantity - other.quantity if (self.quantity - other.quantity) > 0 else print('Отрицательно!')
+        # raise ValueError(f"{self._count} - {other._count}: impossible operation")
+        print(f"{self._count} - {other._count}: impossible operation")
 
+    def __mul__(self, other: "Cell") -> "Cell":
+        return Cell(self._count * other._count)
 
-    def __mul__(self, other):
-        #self.result = Cell(int(self.quantity * other.quantity))
-        return Cell(int(self.quantity * other.quantity))
+    def __truediv__(self, other: "Cell") -> "Cell":
+        return Cell(self._count // other._count)
 
-    def __truediv__(self, other):
-        #self.result = Cell(round(self.quantity // other.quantity))
-        return Cell(round(self.quantity // other.quantity))
+    def make_order(self, per_row: int) -> str:
+        rows, tail = self._count // per_row, self._count % per_row
+        return '\n'.join(['*' * per_row] * rows + (['*' * tail] if tail else []))
+
+    def __str__(self) -> str:
+        return f"Клетка состоит из {self._count} ячеек"
 
 
-    def make_order(self, cells_in_row):
-        row = ''
-        for i in range(int(self.quantity / cells_in_row)):
-            row += f'{"*" * cells_in_row} \\n'
-        row += f'{"*" * (self.quantity % cells_in_row)}'
-        return row
+if __name__ == '__main__':
+    c1 = Cell(20)
+    print(c1)
+    c2 = Cell(15)
+    print(c2)
 
-cells_1 = Cell(15)
-cells_2 = Cell(10)
-print(cells_1)
-print(cells_1 + cells_2)
-print(cells_2 - cells_1)
-print(cells_2.make_order(5))
-print(cells_1.make_order(10))
-print(cells_1 / cells_2)
+    print(c1 + c2)
+    print(c1 - c2)
+    print(c2 - c1)
+    print(c2 - c2)
+    print(c1 * c2)
+    print(c1 / c2)
+    print((c1 * c2).make_order(25))
