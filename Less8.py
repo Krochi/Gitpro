@@ -206,7 +206,7 @@ if __name__ == '__main__':
 
 
 
-# 8.5.
+# 8.5. Продолжить работу над первым заданием.
 
 class StorageError(Exception):
     def __init__(self, text):
@@ -322,7 +322,7 @@ if __name__ == '__main__':
     print("Передаем 1 устройство")
     storage.transfer(last_idx, 'Отдел')
 
-#8.6.
+#8.6. Продолжить работу над вторым заданием.
 
 class AppError(Exception):
     def __init__(self, text):
